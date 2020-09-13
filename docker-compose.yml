@@ -1,13 +1,24 @@
 version: '3'
 
 services:
+
+    preauth:
+        image: httpd
+        build:
+            context: .
+            dockerfile: Dockerfile-preauth
+        restart: ${RESTART_POLICY}
+        ports:
+            #- '${HTTP_PORT}:80'
+            #- '${HTTPS_PORT}:443'
+            - '80:80'
+            - '443:443'
+
+
     # Frontend
     web:
         image: jitsi/web:latest
         restart: ${RESTART_POLICY}
-        ports:
-            - '${HTTP_PORT}:80'
-            - '${HTTPS_PORT}:443'
         volumes:
             - ${CONFIG}/web:/config:Z
             - ${CONFIG}/web/letsencrypt:/etc/letsencrypt:Z
