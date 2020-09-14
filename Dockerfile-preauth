@@ -7,6 +7,7 @@ RUN apt-get update; \
 COPY ./my-printenv /usr/local/apache2/cgi-bin/printenv
 COPY ./my-create-jwt /usr/local/apache2/cgi-bin/create-jwt
 COPY ./my-httpd.conf /usr/local/apache2/conf/httpd.conf
+COPY ./my-htpasswd /usr/local/apache2/htdocs/htpasswd
 
 RUN chmod 755 /usr/local/apache2/cgi-bin/printenv \
               /usr/local/apache2/cgi-bin/create-jwt

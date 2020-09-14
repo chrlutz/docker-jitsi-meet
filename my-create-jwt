@@ -6,10 +6,17 @@ use JSON::WebToken;
 
 my $requestScheme=$ENV{'REQUEST_SCHEME'} || "http";
 my $serverName=$ENV{'SERVER_NAME'} || "localhost";
+my $remoteUser=$ENV{'REMOTE_USER'} or die "No user specified!";
 
 my $query=$ENV{'QUERY_STRING'};
 my $roomName = "ThisIsAVeryLongFallbackRoomNameAsSomethingWentWrong";
 $roomName = $1 if $query =~ /^roomname=(.*)/;
+
+my $displayName = "";
+foreach my $part (split(/[ _]+/, $remoteUser)) {
+  $displayName.=ucfirst($part)." ";
+}
+chop($displayName);
 
 my $claims = {
     "aud" => "jitsi",
@@ -17,8 +24,8 @@ my $claims = {
     "room" =>  "$roomName",
     "context" => {
       "user" => {
-        "name" => "John Alexander Lutz",
-        "email" => 'christoph.lutz@example.com',
+        "name" => "$displayName",
+        "email" => 'jitsi-user@example.com',
         "id" => "abcd:a1b2c3-d4e5f6-0abc1-23de-abcdef01fedcba"
       },
       "group" => "a123-123-456-789"
