@@ -3,11 +3,18 @@
 use strict;
 use JSON;
 use JSON::WebToken;
- 
+
+my $requestScheme=$ENV{'REQUEST_SCHEME'} || "http";
+my $serverName=$ENV{'SERVER_NAME'} || "localhost";
+
+my $query=$ENV{'QUERY_STRING'};
+my $roomName = "ThisIsAVeryLongFallbackRoomNameAsSomethingWentWrong";
+$roomName = $1 if $query =~ /^roomname=(.*)/;
+
 my $claims = {
     "aud" => "jitsi",
     "iss" => "my_jitsi_app_id",
-    "room" =>  "*",
+    "room" =>  "$roomName",
     "context" => {
       "user" => {
         "name" => "John Alexander Lutz",
@@ -21,4 +28,4 @@ my $secret = 'my_jitsi_app_secret';
  
 my $jwt = encode_jwt($claims, $secret, "HS256", { "typ" => "JWT"});
 
-print("Location: http://localhost/MyTestRoom?jwt=$jwt\n\n");
+print("Location: $requestScheme://$serverName/$roomName?jwt=$jwt\n\n");
