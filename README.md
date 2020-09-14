@@ -32,7 +32,7 @@ very similar to the original repo:
 * `./gen-passwords.sh`
 * `docker-compose build; docker-compose up -d;` # creates the CONFIG-folder (as configured in .env)
 * `./my-adjust-config.sh` # config adjustments for our jwt usage
-* `docker-compose build; ocker-compose stop; docker-compose rm -f; docker-compose up -d;` # rebuid & restart
+* `docker-compose build; docker-compose stop; docker-compose rm -f; docker-compose up -d;` # rebuid & restart
 
 
 Installation
