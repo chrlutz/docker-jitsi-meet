@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+
+use strict;
+use JSON;
+use JSON::WebToken;
+ 
+my $claims = {
+    "aud" => "jitsi",
+    "iss" => "my_jitsi_app_id",
+    "room" =>  "*",
+    "context" => {
+      "user" => {
+        "name" => "John Alexander Lutz",
+        "email" => 'christoph.lutz@example.com',
+        "id" => "abcd:a1b2c3-d4e5f6-0abc1-23de-abcdef01fedcba"
+      },
+      "group" => "a123-123-456-789"
+    }
+};
+my $secret = 'my_jitsi_app_secret';
+ 
+my $jwt = encode_jwt($claims, $secret, "HS256", { "typ" => "JWT"});
+
+print("Location: http://localhost/MyTestRoom?jwt=$jwt\n\n");
