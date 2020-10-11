@@ -1,8 +1,28 @@
 <!DOCTYPE html>
-<html style="height:100%;">
-<head>
-<script>
+<html><head>
 
+<style>
+html, body { height: 100%; }
+h1         { line-height: 2; }
+.dist  { line-height: 4; }
+
+body {
+  background: linear-gradient(to bottom, #222288, #6666BB 50%, #222288);
+  text-align: center;
+  color: white;
+}
+
+ul {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40ex;
+  padding: 10px;
+  text-align: left;
+}
+</style>
+
+<script>
 function redirectWithDelay(seconds) {
   var container = document.getElementById('delayCount');
   if(container) {
@@ -19,27 +39,26 @@ function redirectWithDelay(seconds) {
 function setDontBother() {
   localStorage.setItem("DontBotherTimestamp", Date.now());
 }
-
 </script>
-</head>
-<body style="background: linear-gradient(to bottom, #333388, #7777BB 50%, #333388); height: 100%; text-align: center; color: white;">
 
-<h1 style="line-height: 2">Jitsi-Usage Information</h1>
+</head><body>
 
-<ul style="display: block; margin-left: auto; margin-right: auto; width: 40ex; padding: 10px; text-align: left;">
+<h1>Jitsi-Usage Information</h1>
+
+<ul>
   <li>Use Jitsi to communicate with others</li>
   <li>Be nice to others</li>
   <li>Use it if you want to do Screen-Sharing</li>
   <li>Don't use the Camera if you are tired because others will notice</li>
 </ul>
 
-<div style="line-height: 4">
+<div class="dist">
   <button type="button" onclick="redirectWithDelay(0)">Confirm</button>
 </div>
-<div style="line-height: 4">
+<div class="dist">
   <button type="button" onclick="setDontBother(); redirectWithDelay(0);">Confirm and don't bother me for some days</button>
 </div>
-<p style="line-height: 2">…automatically skipping in <span id="delayCount"></span> seconds…</p>
+<p class="dist">...automatically skipping in <span id="delayCount"></span> seconds...</p>
 
 <script>
   confirmed = localStorage.getItem("Confirmed");
@@ -51,5 +70,4 @@ function setDontBother() {
   }
 </script>
 
-</body>
-</html> 
+</body></html>
