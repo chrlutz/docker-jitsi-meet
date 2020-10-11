@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+function redirectWithDelay(seconds) {
+  var container = document.getElementById('delayCount');
+  if(container) {
+    container.innerText = "" + seconds;
+  }
+  if(seconds > 0) {
+    seconds--;
+    window.setTimeout('redirectWithDelay(' + seconds + ')', 1000)
+  } else {
+    window.location.replace('JITSI_REDIRECT');
+  }
+}
+
+function setDontBother() {
+  localStorage.setItem("DontBotherTimestamp", Date.now());
+}
+
+</script>
+</head>
+<body>
+
+<h2>Jitsi-Usage Information</h2>
+
+<div id="demo">A Paragraph.</div>
+
+<button type="button" onclick="redirectWithDelay(0)">Confirm</button>
+<button type="button" onclick="setDontBother()">Confirm and Don't bother me for the next xx days</button>
+<script>
+  confirmed = localStorage.getItem("Confirmed");
+  console.log(confirmed)
+  if(confirmed == "true") {
+    redirectWithDelay(0);
+  } else {
+    //redirectWithDelay(5);
+  }
+</script>
+
+</body>
+</html> 

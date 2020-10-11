@@ -4,6 +4,8 @@ use strict;
 use JSON;
 use JSON::WebToken;
 
+my $htmlTemplateFile="redirect-template.html";
+
 my $requestScheme=$ENV{'REQUEST_SCHEME'} || "http";
 my $serverName=$ENV{'SERVER_NAME'} || "localhost";
 my $remoteUser=$ENV{'REMOTE_USER'} or die "No user specified!";
@@ -36,4 +38,11 @@ my $secret = 'my_jitsi_app_secret';
  
 my $jwt = encode_jwt($claims, $secret, "HS256", { "typ" => "JWT"});
 
-print("Location: $requestScheme://$serverName/$roomName?jwt=$jwt\n\n");
+my $redirect="$roomName?jwt=$jwt";
+
+open(my $fh, "<", "$htmlTemplateFile") or die "Error: Can't open template file '$htmlTemplateFile'!";
+print("Content-type: text/html\n\n");
+foreach my $line (<$fh>) {
+  $line=~s/JITSI_REDIRECT/$redirect/g;
+  print($line);
+}

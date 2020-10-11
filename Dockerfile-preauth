@@ -6,6 +6,7 @@ RUN apt-get update; \
 
 COPY ./my-printenv /usr/local/apache2/cgi-bin/printenv
 COPY ./my-create-jwt /usr/local/apache2/cgi-bin/create-jwt
+COPY ./my-redirect-template.html /usr/local/apache2/cgi-bin/redirect-template.html
 COPY ./my-httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY ./my-htpasswd /usr/local/apache2/htdocs/htpasswd
 
