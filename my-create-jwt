@@ -14,6 +14,7 @@ $roomName = $1 if $query =~ /^roomname=(.*)/;
 
 my $displayName = "";
 foreach my $part (split(/[ _]+/, $remoteUser)) {
+  $part = $part."." if length($part) == 1;
   $displayName.=ucfirst($part)." ";
 }
 chop($displayName);
