@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height:100%;">
 <head>
 <script>
 
@@ -22,21 +22,32 @@ function setDontBother() {
 
 </script>
 </head>
-<body>
+<body style="background: linear-gradient(to bottom, #333388, #7777BB 50%, #333388); height: 100%; text-align: center; color: white;">
 
-<h2>Jitsi-Usage Information</h2>
+<h1 style="line-height: 2">Jitsi-Usage Information</h1>
 
-<div id="demo">A Paragraph.</div>
+<ul style="display: block; margin-left: auto; margin-right: auto; width: 40ex; padding: 10px; text-align: left;">
+  <li>Use Jitsi to communicate with others</li>
+  <li>Be nice to others</li>
+  <li>Use it if you want to do Screen-Sharing</li>
+  <li>Don't use the Camera if you are tired because others will notice</li>
+</ul>
 
-<button type="button" onclick="redirectWithDelay(0)">Confirm</button>
-<button type="button" onclick="setDontBother()">Confirm and Don't bother me for the next xx days</button>
+<div style="line-height: 4">
+  <button type="button" onclick="redirectWithDelay(0)">Confirm</button>
+</div>
+<div style="line-height: 4">
+  <button type="button" onclick="setDontBother(); redirectWithDelay(0);">Confirm and don't bother me for some days</button>
+</div>
+<p style="line-height: 2">…automatically skipping in <span id="delayCount"></span> seconds…</p>
+
 <script>
   confirmed = localStorage.getItem("Confirmed");
   console.log(confirmed)
   if(confirmed == "true") {
     redirectWithDelay(0);
   } else {
-    //redirectWithDelay(5);
+    redirectWithDelay(20);
   }
 </script>
 
